@@ -23,6 +23,7 @@ module.exports = {
 		namesFieldsSubmenu: '.secondary-navbar [data-list-path="names"]',
 		selectsFieldsSubmenu: '.secondary-navbar [data-list-path="selects"]',
 		textsFieldsSubmenu: '.secondary-navbar [data-list-path="texts"]',
+		urlsFieldsSubmenu: '.secondary-navbar [data-list-path="urls"]',
 		frontPageIcon: '.primary-navbar [data-section-label="octicon-globe"]',
 		frontPageIconLink: '.primary-navbar [data-section-label="octicon-globe"] a',
 		logoutIcon: '.primary-navbar [data-section-label="octicon-sign-out"]',
