@@ -18,36 +18,37 @@ module.exports = {
 	after: function (browser) {
 		browser.app.signout();
 		browser.end();
-	}};
-	var fields = ['code','color','date','datetime','html','name','select','text','textarea','url'];
+}};
 
-	for (var i =0; i < fields.length; i++) {
+var fields = ['code','color','date','datetime','html','name','select','text','textarea','url'];
+
+for (var i =0; i < fields.length; i++) {
 	module.exports[fields[i] + ' field should show correctly in the initial modal'] = getFun(fields[i]);
-	}
+}
 
 function getFun(name) {
 	return function (browser) {
-				browser.app
-					.waitForElementVisible('@listScreen')
-					.click('@' + name + 'ListSubmenu')
-					.waitForElementVisible('@listScreen');
+		browser.app
+			.waitForElementVisible('@listScreen')
+			.click('@' + name + 'ListSubmenu')
+			.waitForElementVisible('@listScreen');
 
-				browser.listPage
-					.click('@createFirstItemButton');
+		browser.listPage
+			.click('@createFirstItemButton');
 
-				browser.app
-					.waitForElementVisible('@initialFormScreen');
+		browser.app
+			.waitForElementVisible('@initialFormScreen');
 
-				browser.initialFormPage.section.form.section[name+'List'].section.name
-					.verifyUI();
+		browser.initialFormPage.section.form.section[name+'List'].section.name
+			.verifyUI();
 
-				browser.initialFormPage.section.form.section[name+'List'].section.fieldA
-					.verifyUI();
+		browser.initialFormPage.section.form.section[name+'List'].section.fieldA
+			.verifyUI();
 
-				browser.initialFormPage.section.form
-					.click('@cancelButton');
+		browser.initialFormPage.section.form
+			.click('@cancelButton');
 
-				browser.app
-					.waitForElementVisible('@listScreen');
-			};
+		browser.app
+			.waitForElementVisible('@listScreen');
+	};
 }
