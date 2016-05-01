@@ -18,14 +18,18 @@ module.exports = {
 	after: function (browser) {
 		browser.app.signout();
 		browser.end();
-	},
-		'All field should show correctly in the initial modal': function (browser) {
-			var fields = ['code','color','date','datetime','html','name','select','text','textarea','url'];
+	}};
+	var fields = ['code','color','date','datetime','html','name','select','text','textarea','url'];
 
-			for (var i =0; i < fields.length; i++) {
+	for (var i =0; i < fields.length; i++) {
+	module.exports[fields[i] + ' field should show correctly in the initial modal'] = getFun(fields[i]);
+	}
+
+function getFun(name) {
+	return function (browser) {
 				browser.app
 					.waitForElementVisible('@listScreen')
-					.click('@' + fields[i] + 'ListSubmenu')
+					.click('@' + name + 'ListSubmenu')
 					.waitForElementVisible('@listScreen');
 
 				browser.listPage
@@ -34,10 +38,10 @@ module.exports = {
 				browser.app
 					.waitForElementVisible('@initialFormScreen');
 
-				browser.initialFormPage.section.form.section[fields[i]+'List'].section.name
+				browser.initialFormPage.section.form.section[name+'List'].section.name
 					.verifyUI();
 
-				browser.initialFormPage.section.form.section[fields[i]+'List'].section.fieldA
+				browser.initialFormPage.section.form.section[name+'List'].section.fieldA
 					.verifyUI();
 
 				browser.initialFormPage.section.form
@@ -45,7 +49,5 @@ module.exports = {
 
 				browser.app
 					.waitForElementVisible('@listScreen');
-			}
-	},
-
-};
+			};
+}
